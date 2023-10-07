@@ -1,4 +1,4 @@
-# Go-miner
+# duco-miner
 
 A **[duino-coin](https://duinocoin.com/)** miner made in golang.
 
@@ -9,12 +9,13 @@ A **[duino-coin](https://duinocoin.com/)** miner made in golang.
 * **Username** -> User to mine for.
 * **Goroutines** -> Amount of goroutines to run in the background (can be thought of as threads).
 * **Difficulty** -> NORMAL or MEDIUM mining difficulty.
+* **Mining Key** -> Mining key for the user.
 
 Learn more about [goroutines (threads)](https://gobyexample.com/goroutines).
 
 **You can use the miner with a command line interface:**
 ```bash
-./miner <username (string)> <goroutines (integer)> <difficulty <string>
+./miner <username (string)> <goroutines (integer)> <difficulty <string> <mining key (string)>
 ```
 
 ****
