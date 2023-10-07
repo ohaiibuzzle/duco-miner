@@ -5,8 +5,10 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"encoding/hex"
+	"encoding/json"
 	"log"
 	"net"
+	"net/http"
 	"os"
 	"strconv"
 	"strings"
@@ -25,6 +27,16 @@ var rejected int = 0
 
 var start_time time.Time = time.Now()
 var thread_hases []int
+
+type PoolInfo struct {
+	Client  string `json:"client"`
+	IP      string `json:"ip"`
+	Name    string `json:"name"`
+	Port    int    `json:"port"`
+	Region  string `json:"region"`
+	Server  string `json:"server"`
+	Success bool   `json:"success"`
+}
 
 func work(threadID int) {
 	conn, _ := net.Dial("tcp", addr)
@@ -134,6 +146,27 @@ func main() {
 	log.Println("Username: " + username)
 	log.Println("Goroutines count: " + string_count)
 	log.Println("Difficulty: " + diff)
+
+	// Get pool info from https://server.duinocoin.com/getPool
+	req, err := http.NewRequest("GET", "https://server.duinocoin.com/getPool", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		log.Println("Error getting pool info, using default pool.")
+	} else {
+		defer resp.Body.Close()
+		var poolInfo PoolInfo
+		err := json.NewDecoder(resp.Body).Decode(&poolInfo)
+		if err != nil {
+			log.Println("Error decoding pool info, using default pool.")
+		} else {
+			addr = poolInfo.IP + ":" + strconv.Itoa(poolInfo.Port)
+			log.Println("Using pool: " + addr)
+		}
+	}
 
 	thread_hases = make([]int, x)
 
