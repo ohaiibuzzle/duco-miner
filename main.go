@@ -15,11 +15,11 @@ import (
 	"time"
 )
 
-var username string = ""                // User to mine to.
-var diff string = ""                    // Possible safe values: MEDIUM, LOW, NET.
-var x int = 1                           // Goroutines count.
-var addr string = "103.253.43.216:3674" // Pool's IP:Pool's port for v3.0 .
-var miningKey string = " "              // Mining key for v3.0.
+var username string = ""                      // User to mine to.
+var diff string = ""                          // Possible safe values: MEDIUM, LOW, NET.
+var x int = 1                                 // Goroutines count.
+var addr string = "server.duinocoin.com:2813" // Pool's IP:Pool's port for v3.0 .
+var miningKey string = " "                    // Mining key for v3.0.
 
 // Shares
 var accepted int = 0
