@@ -18,6 +18,11 @@ Learn more about [goroutines (threads)](https://gobyexample.com/goroutines).
 ./miner <username (string)> <goroutines (integer)> <difficulty <string> <mining key (string)>
 ```
 
-****
-### Todo:
-* Add cache for storing user's credentials and execute without asking for them.
+**Or specify these as environment variables:**
+```bash
+export MINER_USERNAME=<username (string)>
+export MINER_GOROUTINES=<goroutines (integer)>
+export MINER_DIFFICULTY=<difficulty (string)>
+export MINER_KEY=<mining key (string)>
+./miner
+```
